@@ -1,0 +1,7 @@
+# Copie este archivo como local.properties (Android Studio agrega sdk.dir automáticamente)
+# Llave pública de ePayco: Dashboard ePayco > Integraciones > Llaves API
+epayco.publicKey=PEGUE_AQUI_SU_PUBLIC_KEY
+# true = modo pruebas (tarjetas de prueba); false = producción
+epayco.test=true
+# Código que se pide para registrarse como Administrador desde la app
+admin.code=TV-ADMIN-2026
