@@ -1,0 +1,66 @@
+rules_version = '2';
+// Reglas de seguridad de Cloud Firestore para Tienda Virtual.
+// Publicar en: Consola de Firebase > Firestore Database > Reglas.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- Funciones auxiliares ----------
+    function signedIn() { return request.auth != null; }
+    function me() { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data; }
+    function isAdmin() { return signedIn() && me().role == 'ADMIN'; }
+    function isSeller() { return signedIn() && me().role == 'SELLER'; }
+    function changed() { return request.resource.data.diff(resource.data).affectedKeys(); }
+
+    // ---------- Usuarios ----------
+    match /users/{uid} {
+      // Cada usuario lee su perfil; el administrador lee todos.
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+      // Registro propio, o creación por parte del administrador.
+      allow create: if signedIn() && (request.auth.uid == uid || isAdmin());
+      // El usuario edita sus datos, pero no su rol, estado ni correo.
+      allow update: if isAdmin() ||
+        (request.auth.uid == uid && !changed().hasAny(['role', 'active', 'email']));
+      allow delete: if isAdmin();
+    }
+
+    // ---------- Productos ----------
+    match /products/{productId} {
+      allow read: if signedIn();
+      allow create: if isAdmin() || (isSeller() && request.resource.data.sellerId == request.auth.uid);
+      // Dueño o administrador editan todo. Un comprador solo puede DESCONTAR stock al pagar.
+      allow update: if isAdmin()
+        || (isSeller() && resource.data.sellerId == request.auth.uid)
+        || (signedIn() && changed().hasOnly(['stock'])
+            && request.resource.data.stock < resource.data.stock
+            && request.resource.data.stock >= 0);
+      allow delete: if isAdmin() || (isSeller() && resource.data.sellerId == request.auth.uid);
+    }
+
+    // ---------- Carrito (subcolección privada de cada comprador) ----------
+    match /carts/{uid}/items/{productId} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+    }
+
+    // ---------- Órdenes ----------
+    match /orders/{orderId} {
+      allow read: if signedIn() && (
+        resource.data.buyerId == request.auth.uid ||
+        request.auth.uid in resource.data.sellerIds ||
+        isAdmin());
+      allow create: if signedIn()
+        && request.resource.data.buyerId == request.auth.uid
+        && request.resource.data.status == 'PENDING_PAYMENT';
+      // Comprador: registra el resultado del pago de una orden pendiente.
+      // Vendedor: avanza el despacho de una orden ya pagada.
+      allow update: if isAdmin()
+        || (resource.data.buyerId == request.auth.uid
+            && resource.data.status == 'PENDING_PAYMENT'
+            && changed().hasOnly(['status', 'paymentRef', 'paymentTransactionId', 'paymentMessage', 'paidAt']))
+        || (request.auth.uid in resource.data.sellerIds
+            && resource.data.status in ['PAID', 'SHIPPED']
+            && changed().hasOnly(['status'])
+            && request.resource.data.status in ['SHIPPED', 'DELIVERED']);
+      allow delete: if isAdmin();
+    }
+  }
+}
