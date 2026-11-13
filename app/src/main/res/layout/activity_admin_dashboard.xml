@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Administrador: panel principal con indicadores en tiempo real y menú lateral -->
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            app:navigationIcon="@drawable/ic_menu"
+            app:navigationIconTint="@color/on_primary"
+            app:title="@string/admin_dashboard_title"
+            app:titleTextColor="@color/on_primary" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:indicatorColor="@color/accent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_m">
+
+                <TextView
+                    android:id="@+id/text_greeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/admin_greeting"
+                    android:textAppearance="@style/TextAppearance.TV.Subtitle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/admin_period"
+                    android:textAppearance="@style/TextAppearance.TV.Caption" />
+
+                <!-- Indicadores: fila 1 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Widget.TV.Card"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/kpi_height"
+                    android:layout_marginEnd="@dimen/spacing_s"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_m">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/kpi_users_label"
+                            android:textAppearance="@style/TextAppearance.TV.Caption" />
+
+                        <TextView
+                            android:id="@+id/kpi_users"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/kpi_loading"
+                            android:textAppearance="@style/TextAppearance.TV.Price" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Widget.TV.Card"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/kpi_height"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_m">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/kpi_products_label"
+                            android:textAppearance="@style/TextAppearance.TV.Caption" />
+
+                        <TextView
+                            android:id="@+id/kpi_products"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/kpi_loading"
+                            android:textAppearance="@style/TextAppearance.TV.Price" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- Indicadores: fila 2 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_s"
+                    android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Widget.TV.Card"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/kpi_height"
+                    android:layout_marginEnd="@dimen/spacing_s"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_m">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/kpi_orders_label"
+                            android:textAppearance="@style/TextAppearance.TV.Caption" />
+
+                        <TextView
+                            android:id="@+id/kpi_orders"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/kpi_loading"
+                            android:textAppearance="@style/TextAppearance.TV.Price" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Widget.TV.Card"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/kpi_height"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_m">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/kpi_sales_label"
+                            android:textAppearance="@style/TextAppearance.TV.Caption" />
+
+                        <TextView
+                            android:id="@+id/kpi_sales"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/kpi_loading"
+                            android:textAppearance="@style/TextAppearance.TV.Price" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- Accesos rápidos -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_l"
+                    android:text="@string/admin_quick_access"
+                    android:textAppearance="@style/TextAppearance.TV.Subtitle" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_users"
+                    style="@style/Widget.TV.Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_s"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/spacing_m"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/spacing_m"
+                        android:text="@string/quick_users"
+                        android:textAppearance="@style/TextAppearance.TV.Subtitle"
+                        app:drawableStartCompat="@drawable/ic_person"
+                        app:drawableTint="@color/primary" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_products"
+                    style="@style/Widget.TV.Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_s"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/spacing_m"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/spacing_m"
+                        android:text="@string/quick_products"
+                        android:textAppearance="@style/TextAppearance.TV.Subtitle"
+                        app:drawableStartCompat="@drawable/ic_store"
+                        app:drawableTint="@color/primary" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_sales"
+                    style="@style/Widget.TV.Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_s"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/spacing_m"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/spacing_m"
+                        android:text="@string/quick_sales"
+                        android:textAppearance="@style/TextAppearance.TV.Subtitle"
+                        app:drawableStartCompat="@drawable/ic_cart"
+                        app:drawableTint="@color/primary" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Actividad reciente -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_l"
+                    android:text="@string/admin_recent"
+                    android:textAppearance="@style/TextAppearance.TV.Subtitle" />
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Widget.TV.Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_s"
+                    app:cardBackgroundColor="@color/surface">
+
+                    <TextView
+                        android:id="@+id/text_recent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/spacing_m"
+                        android:textAppearance="@style/TextAppearance.TV.Body" />
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/surface"
+        app:headerLayout="@layout/nav_header_admin"
+        app:itemIconTint="@color/primary"
+        app:itemTextColor="@color/text_primary"
+        app:menu="@menu/menu_admin_drawer" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

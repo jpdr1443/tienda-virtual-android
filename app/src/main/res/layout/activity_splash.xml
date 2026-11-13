@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_splash">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_l">
+
+        <ImageView
+            android:layout_width="@dimen/logo_size"
+            android:layout_height="@dimen/logo_size"
+            android:background="@drawable/bg_circle_light"
+            android:contentDescription="@string/logo_desc"
+            android:padding="@dimen/spacing_m"
+            android:src="@drawable/ic_store" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_m"
+            android:text="@string/app_name"
+            android:textColor="@color/on_primary"
+            android:textSize="@dimen/text_title"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xs"
+            android:text="@string/splash_tagline"
+            android:textColor="@color/white_soft"
+            android:textSize="@dimen/text_body" />
+
+        <ProgressBar
+            android:layout_width="@dimen/logo_size_small"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_l"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/accent" />
+    </LinearLayout>
+</FrameLayout>

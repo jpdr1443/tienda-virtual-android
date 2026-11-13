@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Encabezado del menú lateral del Administrador -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_header"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_l">
+
+    <ImageView
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
+        android:contentDescription="@string/logo_desc"
+        android:src="@drawable/ic_store" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_s"
+        android:text="@string/app_name"
+        android:textColor="@color/on_primary"
+        android:textSize="@dimen/text_subtitle"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/role_admin"
+        android:textColor="@color/white_soft"
+        android:textSize="@dimen/text_caption" />
+</LinearLayout>

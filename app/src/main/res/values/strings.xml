@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tienda Virtual</string>
+    <string name="logo_desc">Logotipo de la tienda virtual</string>
+    <string name="splash_tagline">Compra, vende y gestiona en un solo lugar</string>
+
+    <!-- Roles -->
+    <string name="role_admin">Administrador</string>
+    <string name="role_seller">Vendedor</string>
+    <string name="role_buyer">Comprador</string>
+
+    <!-- Autenticación -->
+    <string name="login_welcome">Bienvenido</string>
+    <string name="login_subtitle">Inicia sesión para continuar</string>
+    <string name="hint_email">Correo electrónico</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_confirm_password">Confirmar contraseña</string>
+    <string name="btn_login">Ingresar</string>
+    <string name="link_forgot">¿Olvidaste tu contraseña?</string>
+    <string name="link_register">¿No tienes cuenta? Regístrate</string>
+    <string name="btn_biometric">Ingresar con huella</string>
+    <string name="btn_biometric_for">Ingresar con huella (%1$s)</string>
+    <string name="register_title">Crear cuenta</string>
+    <string name="register_heading">Únete a Tienda Virtual</string>
+    <string name="register_role_label">¿Cómo vas a usar la app?</string>
+    <string name="hint_admin_code">Código de administrador</string>
+    <string name="admin_code_helper">Solicítalo al responsable de la tienda</string>
+    <string name="btn_register">Crear cuenta</string>
+    <string name="msg_registered">Cuenta creada. ¡Bienvenido!</string>
+    <string name="recover_title">Recuperar contraseña</string>
+    <string name="recover_heading">¿Olvidaste tu contraseña?</string>
+    <string name="recover_description">Te enviaremos un enlace para crear una nueva contraseña.</string>
+    <string name="btn_send_link">Enviar enlace</string>
+    <string name="msg_recover_sent_to">Revisa tu correo %1$s: te enviamos el enlace para restablecer la contraseña.</string>
+
+    <!-- Biometría -->
+    <string name="biometric_title">Ingresar con huella</string>
+    <string name="biometric_enable_title">Activar ingreso con huella</string>
+    <string name="biometric_subtitle">Apoya tu dedo en el sensor</string>
+    <string name="biometric_unavailable">Este dispositivo no tiene sensor de huella o no hay huellas registradas</string>
+    <string name="biometric_not_enabled">Primero inicia sesión con tu contraseña para activar la huella</string>
+    <string name="biometric_invalidated">Se registró una huella nueva en el teléfono. Por seguridad, inicia sesión con tu contraseña y vuelve a activar la huella.</string>
+    <string name="biometric_failed">No se pudo verificar la huella</string>
+    <string name="biometric_offer_title">¿Activar ingreso con huella?</string>
+    <string name="biometric_offer_message">La próxima vez podrás entrar solo con tu huella. Tus credenciales se guardan cifradas en este teléfono.</string>
+    <string name="biometric_enabled">Ingreso con huella activado</string>
+    <string name="biometric_disabled">Ingreso con huella desactivado</string>
+    <string name="biometric_not_activated">No se activó la huella</string>
+    <string name="biometric_switch">Ingreso con huella dactilar</string>
+    <string name="biometric_switch_hint">Entra a la app sin escribir tu contraseña</string>
+    <string name="biometric_password_message">Confirma tu contraseña para guardarla cifrada con tu huella.</string>
+    <string name="activate">Activar</string>
+    <string name="not_now">Ahora no</string>
+
+    <!-- Errores -->
+    <string name="error_email">Ingresa un correo válido</string>
+    <string name="error_password">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="error_password_match">Las contraseñas no coinciden</string>
+    <string name="error_name">Escribe el nombre completo (mínimo 3 letras)</string>
+    <string name="error_admin_code">Código de administrador incorrecto</string>
+    <string name="error_email_in_use">Ya existe una cuenta con ese correo</string>
+    <string name="error_user_not_found">No existe una cuenta con ese correo</string>
+    <string name="error_bad_credentials">Correo o contraseña incorrectos</string>
+    <string name="error_network">Sin conexión a internet. Intenta de nuevo.</string>
+    <string name="error_permission">No tienes permiso para realizar esta acción</string>
+    <string name="error_generic">Ocurrió un error: %1$s</string>
+    <string name="error_register">No se pudo crear la cuenta</string>
+    <string name="error_profile_missing">Tu perfil no existe o fue eliminado. Contacta al administrador.</string>
+    <string name="error_user_inactive">Tu cuenta está desactivada. Contacta al administrador.</string>
+    <string name="error_session_expired">Tu sesión expiró. Inicia sesión de nuevo.</string>
+    <string name="error_delete_self">No puedes eliminar tu propia cuenta</string>
+    <string name="error_edit_self">No puedes quitarte el rol de administrador ni desactivar tu propia cuenta</string>
+    <string name="error_product_missing">El producto ya no está disponible</string>
+    <string name="error_product_name">Escribe el nombre del producto</string>
+    <string name="error_price">Ingresa un precio mayor a cero</string>
+    <string name="error_stock_value">Ingresa la cantidad disponible</string>
+    <string name="error_category">Elige una categoría</string>
+    <string name="error_image_required">Agrega una foto del producto</string>
+    <string name="error_camera_permission">Se necesita el permiso de cámara para tomar la foto</string>
+    <string name="error_stock">No hay unidades suficientes de %1$s</string>
+    <string name="error_location_permission">Sin permiso de ubicación. Escribe la dirección manualmente.</string>
+    <string name="error_location_unavailable">No se pudo obtener la ubicación. Activa el GPS e intenta de nuevo.</string>
+    <string name="error_address">Escribe la dirección de entrega</string>
+    <string name="error_city">Escribe la ciudad</string>
+    <string name="error_epayco_key">Falta configurar la llave pública de ePayco en local.properties</string>
+    <string name="error_no_maps">No hay una app de mapas instalada</string>
+    <string name="cancel">Cancelar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="exit">Salir</string>
+
+    <!-- Administrador: dashboard -->
+    <string name="admin_dashboard_title">Panel principal</string>
+    <string name="admin_greeting">Hola, Administrador</string>
+    <string name="admin_greeting_name">Hola, %1$s</string>
+    <string name="admin_period">Resumen del mes en curso</string>
+    <string name="kpi_loading">—</string>
+    <string name="kpi_users_label">Usuarios activos</string>
+    <string name="kpi_products_label">Productos publicados</string>
+    <string name="kpi_orders_label">Pedidos de hoy</string>
+    <string name="kpi_sales_label">Ventas del mes</string>
+    <string name="admin_quick_access">Accesos rápidos</string>
+    <string name="quick_users">Gestionar usuarios</string>
+    <string name="quick_products">Gestionar productos</string>
+    <string name="quick_sales">Ver reporte de ventas</string>
+    <string name="admin_recent">Actividad reciente</string>
+    <string name="recent_user">Usuario registrado: %1$s (%2$s)</string>
+    <string name="recent_order">Pedido %1$s pagado por %2$s</string>
+    <string name="recent_empty">Aún no hay actividad este mes</string>
+    <string name="admin_profile_title">Mi perfil</string>
+
+    <!-- Administrador: menú lateral -->
+    <string name="drawer_dashboard">Dashboard</string>
+    <string name="drawer_users">Usuarios</string>
+    <string name="drawer_products">Productos</string>
+    <string name="drawer_sales">Reporte de ventas</string>
+    <string name="drawer_profile">Mi perfil</string>
+    <string name="drawer_logout">Cerrar sesión</string>
+
+    <!-- Administrador: usuarios -->
+    <string name="admin_users_title">Gestión de usuarios</string>
+    <string name="hint_search">Buscar por nombre, correo o rol</string>
+    <string name="btn_new_user">Nuevo usuario</string>
+    <string name="users_count">%1$d usuarios</string>
+    <string name="users_empty">No hay usuarios que coincidan con la búsqueda</string>
+    <string name="cd_edit">Editar</string>
+    <string name="cd_delete">Eliminar</string>
+    <string name="user_form_title">Editar usuario</string>
+    <string name="user_new_title">Nuevo usuario</string>
+    <string name="hint_full_name">Nombre completo</string>
+    <string name="hint_phone">Teléfono</string>
+    <string name="hint_role">Rol</string>
+    <string name="hint_initial_password">Contraseña inicial</string>
+    <string name="initial_password_helper">El usuario podrá cambiarla con "¿Olvidaste tu contraseña?"</string>
+    <string name="user_status_label">Usuario activo (puede iniciar sesión)</string>
+    <string name="status_active">Activo</string>
+    <string name="status_inactive">Inactivo</string>
+    <string name="btn_save">Guardar</string>
+    <string name="btn_delete_user">Eliminar usuario</string>
+    <string name="delete_user_title">¿Eliminar usuario?</string>
+    <string name="delete_user_message">Se eliminará el perfil de %1$s y ya no podrá iniciar sesión.</string>
+
+    <!-- Productos -->
+    <string name="admin_products_title">Gestión de productos</string>
+    <string name="hint_search_products_admin">Buscar por nombre, categoría o vendedor</string>
+    <string name="products_count">%1$d productos</string>
+    <string name="products_empty">No hay productos registrados</string>
+    <string name="btn_new_product">Nuevo producto</string>
+    <string name="cd_product_image">Imagen del producto</string>
+    <string name="stock_units">Stock: %1$d unidades</string>
+    <string name="sold_by">Vendido por %1$s</string>
+    <string name="status_paused">Pausado</string>
+    <string name="status_out_of_stock">Agotado</string>
+    <string name="product_form_title">Editar producto</string>
+    <string name="product_new_title">Nuevo producto</string>
+    <string name="hint_product_name">Nombre del producto</string>
+    <string name="hint_description">Descripción</string>
+    <string name="hint_price">Precio</string>
+    <string name="currency_prefix">$ </string>
+    <string name="hint_stock">Stock</string>
+    <string name="hint_category">Categoría</string>
+    <string name="product_published">Publicado en el catálogo</string>
+    <string name="btn_upload_image">Tomar foto o elegir de la galería</string>
+    <string name="image_source_title">Imagen del producto</string>
+    <string name="image_camera">Tomar foto con la cámara</string>
+    <string name="image_gallery">Elegir de la galería</string>
+    <string name="btn_save_product">Guardar producto</string>
+    <string name="btn_delete_product">Eliminar producto</string>
+    <string name="msg_product_saved">Producto guardado</string>
+    <string name="delete_product_title">¿Eliminar producto?</string>
+    <string name="delete_product_message">Se eliminará %1$s y su imagen. Esta acción no se puede deshacer.</string>
+
+    <!-- Administrador: reporte de ventas -->
+    <string name="admin_sales_title">Reporte de ventas</string>
+    <string name="period_week">Últimos 7 días</string>
+    <string name="period_month">Este mes</string>
+    <string name="period_year">Este año</string>
+    <string name="sales_total_label">Total vendido en el periodo</string>
+    <string name="sales_orders_count">%1$d pedidos pagados</string>
+    <string name="sales_units_count">%1$d unidades vendidas</string>
+    <string name="sales_chart_title">Ventas por día</string>
+    <string name="sales_table_header">Detalle por día</string>
+    <string name="sales_row">%1$s · %2$d pedidos · %3$s</string>
+    <string name="sales_empty">No hay ventas en este periodo</string>
+    <string name="btn_export">Exportar reporte (CSV)</string>
+    <string name="sales_export_subject">Reporte de ventas · Tienda Virtual</string>
+
+    <!-- Vendedor -->
+    <string name="seller_products_title">Mis productos</string>
+    <string name="seller_products_hint">Administra el catálogo de tu tienda</string>
+    <string name="seller_products_summary">%1$d productos · %2$d disponibles</string>
+    <string name="seller_products_empty">Aún no tienes productos. Toca "Nuevo producto" para publicar el primero.</string>
+    <string name="seller_orders_title">Pedidos recibidos</string>
+    <string name="order_filter_all">Todos</string>
+    <string name="orders_empty">No hay pedidos en esta categoría</string>
+    <string name="order_update_title">Actualizar pedido</string>
+    <string name="order_update_message">¿Marcar el pedido %1$s como %2$s?</string>
+    <string name="order_mark_as">Marcar como %1$s</string>
+    <string name="seller_profile_title">Perfil del vendedor</string>
+    <string name="seller_stat_products_label">Productos</string>
+    <string name="seller_stat_sales_label">Ventas</string>
+    <string name="seller_stat_revenue_label">Ingresos</string>
+    <string name="hint_store_name">Nombre de la tienda</string>
+
+    <!-- Órdenes -->
+    <string name="order_code">Pedido %1$s</string>
+    <string name="order_buyer_line">%1$s · %2$s</string>
+    <string name="status_pending_payment">Pendiente de pago</string>
+    <string name="status_paid">Pagado</string>
+    <string name="status_shipped">Enviado</string>
+    <string name="status_delivered">Entregado</string>
+    <string name="status_rejected">Pago rechazado</string>
+
+    <!-- Comprador: inicio y catálogo -->
+    <string name="buyer_home_title">Inicio</string>
+    <string name="home_greeting">¿Qué estás buscando hoy?</string>
+    <string name="home_greeting_name">Hola, %1$s. ¿Qué estás buscando hoy?</string>
+    <string name="hint_search_products">Buscar productos</string>
+    <string name="banner_tag">TEMPORADA DE DESCUENTOS</string>
+    <string name="banner_title">Lo mejor de nuestros vendedores</string>
+    <string name="btn_see_catalog">Ver catálogo</string>
+    <string name="home_categories">Categorías</string>
+    <string name="home_featured">Novedades</string>
+    <string name="catalog_title">Catálogo</string>
+    <string name="catalog_empty">No hay productos disponibles</string>
+    <string name="filter_all">Todos</string>
+    <string-array name="categories">
+        <item>Tecnología</item>
+        <item>Hogar</item>
+        <item>Moda</item>
+        <item>Deportes</item>
+        <item>Otros</item>
+    </string-array>
+
+    <!-- Comprador: detalle -->
+    <string name="detail_title">Detalle del producto</string>
+    <string name="detail_description_title">Descripción</string>
+    <string name="detail_stock_value">Disponibles: %1$d unidades</string>
+    <string name="detail_quantity">Cantidad</string>
+    <string name="btn_minus">−</string>
+    <string name="btn_plus">+</string>
+    <string name="btn_add_cart">Agregar</string>
+    <string name="btn_buy_now">Comprar ahora</string>
+    <string name="msg_added_cart">Producto agregado al carrito</string>
+
+    <!-- Comprador: carrito -->
+    <string name="cart_title">Carrito de compras</string>
+    <string name="cart_empty">Tu carrito está vacío</string>
+    <string name="cart_subtotal_label">Subtotal</string>
+    <string name="cart_shipping_label">Envío</string>
+    <string name="cart_shipping_value">Gratis</string>
+    <string name="cart_total_label">Total</string>
+    <string name="btn_go_checkout">Ir a pagar</string>
+    <string name="cart_remove_title">¿Quitar del carrito?</string>
+    <string name="cart_remove_message">Se quitará %1$s del carrito.</string>
+
+    <!-- Comprador: checkout y pago -->
+    <string name="checkout_title">Pago</string>
+    <string name="checkout_address_title">Dirección de entrega</string>
+    <string name="hint_address">Dirección</string>
+    <string name="hint_city">Ciudad</string>
+    <string name="btn_use_location">Usar mi ubicación actual</string>
+    <string name="checkout_coordinates">Ubicación capturada: %1$.5f, %2$.5f</string>
+    <string name="msg_location_ok">Ubicación capturada</string>
+    <string name="checkout_payment_title">Método de pago</string>
+    <string name="pay_epayco">Pago seguro con ePayco</string>
+    <string name="pay_epayco_methods">Tarjeta de crédito o débito, PSE, Nequi, Daviplata y efectivo</string>
+    <string name="checkout_summary_items">Resumen del pedido</string>
+    <string name="btn_pay">Pagar ahora</string>
+    <string name="payment_title">Pasarela de pagos</string>
+    <string name="payment_item_name">Compra en Tienda Virtual</string>
+    <string name="payment_loading">Cargando la pasarela segura de ePayco…</string>
+    <string name="payment_validating">Confirmando la transacción con ePayco…</string>
+    <string name="payment_no_reference">ePayco no devolvió una referencia de pago</string>
+    <string name="payment_invoice_mismatch">La transacción no corresponde a este pedido</string>
+    <string name="payment_accepted">¡Pago aprobado!</string>
+    <string name="payment_accepted_message">Tu pedido quedó registrado y el vendedor ya puede despacharlo.</string>
+    <string name="payment_pending">Pago pendiente</string>
+    <string name="payment_pending_message">ePayco está procesando el pago. Revisa el estado en "Mis pedidos".</string>
+    <string name="payment_rejected">Pago rechazado</string>
+    <string name="payment_failed">No se pudo completar el pago</string>
+    <string name="payment_rejected_message">No se realizó ningún cobro. Puedes intentarlo de nuevo desde el carrito.</string>
+    <string name="payment_exit_title">¿Salir del pago?</string>
+    <string name="payment_exit_message">El pedido quedará pendiente de pago y tus productos seguirán en el carrito.</string>
+    <string name="see_my_orders">Ver mis pedidos</string>
+
+    <!-- Perfil -->
+    <string name="buyer_profile_title">Mi perfil</string>
+    <string name="profile_orders">Mis pedidos</string>
+    <string name="buyer_orders_hint">Toca un pedido para ver la dirección de entrega en el mapa</string>
+    <string name="buyer_orders_empty">Aún no has hecho compras</string>
+    <string name="profile_data_title">Mis datos</string>
+    <string name="btn_update_profile">Actualizar perfil</string>
+    <string name="btn_logout">Cerrar sesión</string>
+
+    <!-- Navegación inferior -->
+    <string name="nav_home">Inicio</string>
+    <string name="nav_catalog">Catálogo</string>
+    <string name="nav_cart">Carrito</string>
+    <string name="nav_profile">Perfil</string>
+    <string name="nav_products">Productos</string>
+    <string name="nav_orders">Pedidos</string>
+
+    <!-- Mensajes y diálogos -->
+    <string name="msg_saved">Cambios guardados</string>
+    <string name="msg_deleted">Registro eliminado</string>
+    <string name="delete">Eliminar</string>
+</resources>

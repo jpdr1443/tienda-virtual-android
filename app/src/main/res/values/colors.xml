@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Paleta propia "Índigo & Ámbar" (no usa los colores por defecto de Material) -->
+    <color name="primary">#1E3A8A</color>
+    <color name="primary_dark">#172C6B</color>
+    <color name="primary_soft">#E0E7FF</color>
+    <color name="teal">#0D9488</color>
+    <color name="accent">#F59E0B</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="white_soft">#33FFFFFF</color>
+
+    <color name="background">#F8FAFC</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="border">#E2E8F0</color>
+    <color name="text_primary">#0F172A</color>
+    <color name="text_secondary">#64748B</color>
+
+    <color name="success">#16A34A</color>
+    <color name="success_soft">#DCFCE7</color>
+    <color name="danger">#DC2626</color>
+    <color name="danger_soft">#FEE2E2</color>
+    <color name="warning">#D97706</color>
+    <color name="warning_soft">#FEF3C7</color>
+
+    <color name="placeholder_start">#FDE68A</color>
+    <color name="placeholder_end">#A7F3D0</color>
+</resources>

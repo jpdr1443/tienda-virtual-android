@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Barra del gráfico de ventas: la altura de @id/bar se asigna en código -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal|bottom"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/bar"
+        android:layout_width="24dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_bar" />
+
+    <TextView
+        android:id="@+id/bar_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_xs"
+        android:textAppearance="@style/TextAppearance.TV.Caption" />
+</LinearLayout>
