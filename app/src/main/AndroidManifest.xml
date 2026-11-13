@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Firebase, ePayco y carga de imágenes -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Huella dactilar -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" android:maxSdkVersion="28" />
+    <!-- Geolocalización de la dirección de entrega -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- Fotos de productos -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.fingerprint" android:required="false" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+
+    <!-- Android 11+: permite consultar si hay una app de mapas para abrir la ubicación de entrega -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="geo" />
+        </intent>
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_store"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.TiendaVirtual">
+
+        <activity
+            android:name=".ui.auth.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Transversales -->
+        <activity android:name=".ui.auth.LoginActivity" android:exported="false" />
+        <activity android:name=".ui.auth.RegisterActivity" android:exported="false" />
+        <activity android:name=".ui.auth.RecoverPasswordActivity" android:exported="false" />
+        <activity android:name=".ui.common.ProfileActivity" android:exported="false" />
+
+        <!-- Administrador -->
+        <activity android:name=".ui.admin.AdminDashboardActivity" android:exported="false" />
+        <activity android:name=".ui.admin.AdminUsersActivity" android:exported="false" />
+        <activity android:name=".ui.admin.AdminUserFormActivity" android:exported="false" />
+        <activity android:name=".ui.admin.AdminProductsActivity" android:exported="false" />
+        <activity android:name=".ui.admin.AdminSalesActivity" android:exported="false" />
+
+        <!-- Vendedor -->
+        <activity android:name=".ui.seller.SellerProductsActivity" android:exported="false" />
+        <activity android:name=".ui.seller.ProductFormActivity" android:exported="false" />
+        <activity android:name=".ui.seller.SellerOrdersActivity" android:exported="false" />
+
+        <!-- Comprador -->
+        <activity android:name=".ui.buyer.BuyerHomeActivity" android:exported="false" />
+        <activity android:name=".ui.buyer.CatalogActivity" android:exported="false" />
+        <activity android:name=".ui.buyer.ProductDetailActivity" android:exported="false" />
+        <activity android:name=".ui.buyer.CartActivity" android:exported="false" />
+        <activity android:name=".ui.buyer.CheckoutActivity" android:exported="false" />
+        <activity android:name=".ui.buyer.PaymentActivity" android:exported="false" />
+        <activity android:name=".ui.buyer.BuyerOrdersActivity" android:exported="false" />
+
+        <!-- Comparte con la cámara un archivo temporal donde guardar la foto del producto -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+
+</manifest>
