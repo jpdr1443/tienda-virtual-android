@@ -24,7 +24,8 @@ android {
         versionCode = 2
         versionName = "2.0"
 
-        buildConfigField("String", "EPAYCO_PUBLIC_KEY", "\"${localProps.getProperty("epayco.publicKey", "")}\"")
+        // Si no hay llave propia se usa la llave de ejemplo de la documentación de ePayco (solo modo pruebas).
+        buildConfigField("String", "EPAYCO_PUBLIC_KEY", "\"${localProps.getProperty("epayco.publicKey", "45b960805ced5c27ce34b1600b4b9f54")}\"")
         buildConfigField("boolean", "EPAYCO_TEST", localProps.getProperty("epayco.test", "true"))
         buildConfigField("String", "ADMIN_REGISTRATION_CODE", "\"${localProps.getProperty("admin.code", "TV-ADMIN-2026")}\"")
     }
