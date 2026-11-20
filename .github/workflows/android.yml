@@ -7,6 +7,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -37,3 +40,13 @@ jobs:
         with:
           name: TiendaVirtual-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
+      # Publica el APK en la página de Releases para descargarlo desde el celular.
+      - name: Publicar en Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: apk-latest
+          name: Tienda Virtual (APK más reciente)
+          body: APK de depuración compilado automáticamente desde la rama main. Descárgalo en el celular e instálalo.
+          files: app/build/outputs/apk/debug/app-debug.apk
+          make_latest: true
