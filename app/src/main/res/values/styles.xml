@@ -14,6 +14,9 @@
     </style>
 
     <!-- Tipografías reutilizables -->
+    <!-- Estilo base: los estilos TextAppearance.TV.* heredan de él por su nombre -->
+    <style name="TextAppearance.TV" parent="TextAppearance.Material3.BodyMedium" />
+
     <style name="TextAppearance.TV.Title">
         <item name="android:textSize">@dimen/text_title</item>
         <item name="android:textStyle">bold</item>
