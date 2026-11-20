@@ -19,12 +19,13 @@ import com.tiendavirtual.app.data.repository.UserRepository
 import com.tiendavirtual.app.databinding.ActivityProductFormBinding
 import com.tiendavirtual.app.ui.common.BaseActivity
 import com.tiendavirtual.app.ui.common.loadProductImage
+import com.tiendavirtual.app.util.ImageCompressor
 import java.io.File
 
 /**
  * Crear / editar producto (Create y Update del CRUD). Lo usan el Vendedor y
- * el Administrador. La imagen se toma con la cámara o se elige de la galería
- * y se sube a Firebase Storage al guardar.
+ * el Administrador. La imagen se toma con la cámara o se elige de la galería;
+ * al guardar se comprime (ImageCompressor) y se guarda en Firestore.
  */
 class ProductFormActivity : BaseActivity() {
 
@@ -117,7 +118,7 @@ class ProductFormActivity : BaseActivity() {
         binding.imageProduct.setImageURI(uri)
     }
 
-    /** Valida los campos y guarda en Firestore (y la imagen en Storage si cambió). */
+    /** Valida los campos y guarda el producto (con su imagen comprimida si cambió) en Firestore. */
     private fun save() {
         val name = binding.inputName.text?.toString().orEmpty().trim()
         val description = binding.inputDescription.text?.toString().orEmpty().trim()
@@ -147,12 +148,14 @@ class ProductFormActivity : BaseActivity() {
                 toast(R.string.error_permission)
                 return@launchUi
             }
+            // La foto nueva se reduce y comprime antes de guardarla en el documento.
+            val image = pendingImage?.let { ImageCompressor.toDataUri(this, it) }
             repo.save(
                 base.copy(
                     name = name, description = description, price = price!!, stock = stock!!,
                     category = category, active = binding.switchActive.isChecked
                 ),
-                pendingImage
+                image
             )
             toast(R.string.msg_product_saved)
             finish()

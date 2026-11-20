@@ -1,21 +1,19 @@
 package com.tiendavirtual.app.data.repository
 
-import android.net.Uri
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
 import com.tiendavirtual.app.data.model.Product
 import kotlinx.coroutines.tasks.await
 
 /**
- * CRUD de productos (colección "products") y manejo de sus imágenes en
- * Firebase Storage (carpeta "products/{idProducto}/").
+ * CRUD de productos (colección "products"). La imagen de cada producto se
+ * guarda en el mismo documento como JPEG comprimido en base64 (campo imageUrl
+ * con formato data URI), generado por util/ImageCompressor.
  *
  * Los filtros por categoría y texto se hacen en memoria para no requerir
  * índices compuestos en Firestore.
  */
 class ProductRepository(
-    private val db: FirebaseFirestore = FirebaseFirestore.getInstance(),
-    private val storage: FirebaseStorage = FirebaseStorage.getInstance()
+    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 ) {
     private val products get() = db.collection(COLLECTION)
 
@@ -37,25 +35,16 @@ class ProductRepository(
         products.document(id).get().await().toObject(Product::class.java)
 
     /**
-     * Crea o actualiza un producto. Si se eligió una imagen nueva (cámara o
-     * galería) se sube primero a Storage, se obtiene su URL de descarga y se
-     * borra la imagen anterior para no dejar archivos huérfanos.
+     * Crea o actualiza un producto (Create / Update del CRUD).
      *
+     * @param newImage imagen nueva ya comprimida como data URI, o null para
+     *  conservar la imagen actual del producto.
      * @return el producto guardado, con su id definitivo.
      */
-    suspend fun save(product: Product, newImage: Uri?): Product {
+    suspend fun save(product: Product, newImage: String?): Product {
         val doc = if (product.id.isBlank()) products.document() else products.document(product.id)
         var saved = product.copy(id = doc.id)
-
-        if (newImage != null) {
-            val path = "products/${doc.id}/${System.currentTimeMillis()}.jpg"
-            val ref = storage.reference.child(path)
-            ref.putFile(newImage).await()
-            val url = ref.downloadUrl.await().toString()
-            deleteImage(product.imagePath)
-            saved = saved.copy(imageUrl = url, imagePath = path)
-        }
-
+        if (newImage != null) saved = saved.copy(imageUrl = newImage, imagePath = "")
         doc.set(saved).await()
         return saved
     }
@@ -65,16 +54,9 @@ class ProductRepository(
         products.document(id).update("active", active).await()
     }
 
-    /** Elimina el documento y su imagen en Storage. */
+    /** Elimina el producto; la imagen se borra con él porque vive en el mismo documento. */
     suspend fun delete(product: Product) {
         products.document(product.id).delete().await()
-        deleteImage(product.imagePath)
-    }
-
-    /** Borra un archivo de Storage; si ya no existe se ignora el error. */
-    private suspend fun deleteImage(path: String) {
-        if (path.isBlank()) return
-        runCatching { storage.reference.child(path).delete().await() }
     }
 
     companion object {

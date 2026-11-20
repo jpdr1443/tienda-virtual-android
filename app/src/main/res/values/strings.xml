@@ -75,6 +75,7 @@
     <string name="error_price">Ingresa un precio mayor a cero</string>
     <string name="error_stock_value">Ingresa la cantidad disponible</string>
     <string name="error_category">Elige una categoría</string>
+    <string name="error_image_read">No se pudo leer la imagen seleccionada</string>
     <string name="error_image_required">Agrega una foto del producto</string>
     <string name="error_camera_permission">Se necesita el permiso de cámara para tomar la foto</string>
     <string name="error_stock">No hay unidades suficientes de %1$s</string>

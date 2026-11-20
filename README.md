@@ -7,12 +7,12 @@ Tienda virtual nativa para Android con tres roles: **Administrador**, **Vendedor
 | Autenticación | Firebase Authentication (correo y contraseña): registro, inicio y cierre de sesión, recuperación de contraseña. El rol se lee de Firestore. | `AuthRepository`, `LoginActivity`, `RegisterActivity`, `RecoverPasswordActivity` |
 | Huella dactilar | `BiometricPrompt` + llave AES del Android Keystore que exige huella. Las credenciales se guardan cifradas. | `util/BiometricAuth`, `LoginActivity`, `ProfileActivity` |
 | CRUD de usuarios | El Administrador crea (cuenta + perfil), lista, busca, edita, desactiva y elimina. | `UserRepository`, `AdminUsersActivity`, `AdminUserFormActivity` |
-| CRUD de productos | Vendedor (sus productos) y Administrador (todos). La imagen se toma con la cámara o se elige de la galería y se sube a Firebase Storage. | `ProductRepository`, `ProductFormActivity`, `SellerProductsActivity`, `AdminProductsActivity` |
+| CRUD de productos | Vendedor (sus productos) y Administrador (todos). La imagen se toma con la cámara o se elige de la galería, se comprime (JPEG ≤ 300 KB, 800 px) y se guarda en Firestore. | `ProductRepository`, `util/ImageCompressor`, `ProductFormActivity`, `SellerProductsActivity`, `AdminProductsActivity` |
 | Carrito y órdenes | Carrito persistente en Firestore. Las órdenes guardan su historial con estados (pendiente → pagada → enviada → entregada) y se descuenta el stock en una transacción. | `CartRepository`, `OrderRepository`, `CartActivity`, `SellerOrdersActivity`, `BuyerOrdersActivity` |
 | Geolocalización | Fused Location Provider (Google Play Services) + geocodificación inversa. Las coordenadas quedan en la orden y se abren en Google Maps. | `util/LocationHelper`, `CheckoutActivity`, `OrderMapLauncher` |
 | Pasarela de pagos | Checkout estándar de ePayco en un WebView. La respuesta se confirma con la API de validación de ePayco. | `data/payment/EpaycoService`, `PaymentActivity` |
 
-**Tecnologías:** Kotlin, XML con ViewBinding, corrutinas, Material Components 1.12, Firebase BoM 33.5.1 (Auth, Firestore, Storage), Play Services Location 21.3, AndroidX Biometric 1.1 y Glide 4.16.
+**Tecnologías:** Kotlin, XML con ViewBinding, corrutinas, Material Components 1.12, Firebase BoM 33.5.1 (Auth, Firestore), Play Services Location 21.3, AndroidX Biometric 1.1 y Glide 4.16.
 **Versiones:** minSdk 24 · targetSdk 34 · compileSdk 34 · JDK 17 · AGP 8.5.2 · Gradle 8.7.
 
 ---
@@ -24,8 +24,7 @@ Tienda virtual nativa para Android con tres roles: **Administrador**, **Vendedor
 2. Agrega una app Android con el paquete **`com.tiendavirtual.app`** y descarga **`google-services.json`** en la carpeta **`app/`**. Ese archivo no se sube al repositorio.
 3. **Authentication → Método de acceso:** habilita **Correo electrónico/contraseña**.
 4. **Firestore Database:** créala en modo producción y pega en *Reglas* el contenido de `firebase/firestore.rules`.
-5. **Storage:** créalo y pega en *Reglas* el contenido de `firebase/storage.rules`.
-   > Desde el 3 de febrero de 2026 Cloud Storage exige que el proyecto esté en el **plan Blaze** (pago por uso). La cuota gratuita se mantiene, así que para un proyecto académico el costo es $0. Se recomienda crear una alerta de presupuesto de 1 USD.
+   > No se usa Firebase Storage: desde el 3 de febrero de 2026 exige el plan de pago Blaze. Las imágenes se guardan comprimidas dentro de Firestore, así que todo funciona en el plan gratuito **Spark**.
 
 ### 1.2 Llaves locales
 Copia `local.properties.example` como `local.properties` y completa los valores:
@@ -65,7 +64,7 @@ com.tiendavirtual.app
 │   ├── seller/       SellerProducts, ProductForm, SellerOrders
 │   ├── buyer/        BuyerHome, Catalog, ProductDetail, Cart, Checkout, Payment, BuyerOrders
 │   └── common/       BaseActivity, Navigator, Adapters, ProfileActivity, OrderMapLauncher
-└── util/             BiometricAuth, LocationHelper, Formatters, Session, AppException
+└── util/             BiometricAuth, LocationHelper, ImageCompressor, Formatters, Session, AppException
 ```
 
 - **Activities** solo manejan la vista. Toda lectura y escritura pasa por un **repositorio**.
@@ -78,13 +77,13 @@ com.tiendavirtual.app
 
 ```
 users/{uid}                 name, email, phone, role(ADMIN|SELLER|BUYER), active, storeName, address, city, createdAt
-products/{productId}        name, description, price, stock, category, imageUrl, imagePath, sellerId, sellerName, active, createdAt
+products/{productId}        name, description, price, stock, category, imageUrl (data URI JPEG base64), sellerId, sellerName, active, createdAt
 carts/{uid}/items/{productId}   name, price, quantity, imageUrl, sellerId
 orders/{orderId}            buyerId, buyerName, buyerEmail, items[], sellerIds[], total, address, city,
                             latitude, longitude, status, paymentRef, paymentTransactionId, paymentMessage, createdAt, paidAt
 ```
 
-Storage: `products/{productId}/{timestamp}.jpg`
+Las imágenes viven en el campo `imageUrl` del producto (máx. ~400 KB en base64, por debajo del límite de 1 MB por documento).
 
 ### 2.2 Flujo de compra y pago
 

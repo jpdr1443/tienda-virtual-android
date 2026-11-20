@@ -27,7 +27,7 @@ import com.tiendavirtual.app.util.Formatters
  * entrega anterior: ahora cada lista se dibuja con los datos de Firestore.
  */
 
-/** Carga la imagen de un producto desde su URL de Storage, con marcador mientras llega. */
+/** Carga la imagen de un producto (data URI en base64 guardado en Firestore), con marcador mientras llega. */
 fun ImageView.loadProductImage(url: String) {
     if (url.isBlank()) {
         setImageResource(R.drawable.ic_store)

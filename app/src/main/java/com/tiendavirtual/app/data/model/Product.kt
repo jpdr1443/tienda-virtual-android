@@ -8,8 +8,9 @@ import com.google.firebase.firestore.ServerTimestamp
  * Producto publicado por un vendedor (colección "products").
  *
  * @property price precio en pesos colombianos, sin decimales.
- * @property imageUrl URL pública de descarga de la imagen en Firebase Storage.
- * @property imagePath ruta interna del archivo en Storage; se usa para borrarlo.
+ * @property imageUrl imagen del producto como data URI (JPEG comprimido en base64),
+ *  generada por util/ImageCompressor y guardada en el mismo documento.
+ * @property imagePath reservado (versiones anteriores guardaban aquí la ruta en Storage).
  * @property active si es false el producto queda pausado y no aparece en el catálogo.
  */
 data class Product(

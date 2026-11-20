@@ -63,11 +63,13 @@ dependencies {
     // Biometría (huella dactilar)
     implementation("androidx.biometric:biometric:1.1.0")
 
-    // Firebase: autenticación, base de datos Firestore y almacenamiento de imágenes
+    // Firebase: autenticación y base de datos Firestore (también guarda las imágenes comprimidas)
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
-    implementation("com.google.firebase:firebase-storage")
+
+    // Lectura de la orientación EXIF de las fotos de cámara
+    implementation("androidx.exifinterface:exifinterface:1.3.7")
 
     // Corrutinas: permite usar await() sobre las Task de Firebase y Play Services
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
@@ -76,6 +78,6 @@ dependencies {
     // Google Play Services: ubicación (Fused Location Provider)
     implementation("com.google.android.gms:play-services-location:21.3.0")
 
-    // Carga de imágenes remotas (Firebase Storage) en ImageView
+    // Carga de imágenes (data URI en base64) en ImageView con caché
     implementation("com.github.bumptech.glide:glide:4.16.0")
 }
