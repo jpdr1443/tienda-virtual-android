@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Acción de cierre de sesión visible en la barra superior de las pantallas principales -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_logout"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/btn_logout"
+        app:iconTint="@color/on_primary"
+        app:showAsAction="always" />
+</menu>

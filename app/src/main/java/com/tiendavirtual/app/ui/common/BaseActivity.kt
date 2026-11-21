@@ -19,14 +19,35 @@ import kotlinx.coroutines.launch
  */
 abstract class BaseActivity : AppCompatActivity() {
 
-    /** Pone el título en la barra superior y, si [showBack], la flecha de regreso. */
-    protected fun setupToolbar(toolbar: MaterialToolbar, title: Int, showBack: Boolean = true) {
+    /**
+     * Pone el título en la barra superior y, si [showBack], la flecha de regreso.
+     * En las pantallas principales ([showLogout]) agrega el botón de cerrar sesión,
+     * para poder cambiar de usuario desde cualquier rol.
+     */
+    protected fun setupToolbar(
+        toolbar: MaterialToolbar,
+        title: Int,
+        showBack: Boolean = true,
+        showLogout: Boolean = !showBack
+    ) {
         toolbar.setTitle(title)
         if (showBack) {
             toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
             toolbar.setNavigationOnClickListener { finish() }
         } else {
             toolbar.navigationIcon = null
+        }
+        toolbar.menu.clear()
+        if (showLogout) {
+            toolbar.inflateMenu(R.menu.menu_toolbar_session)
+            toolbar.setOnMenuItemClickListener { item ->
+                if (item.itemId == R.id.action_logout) {
+                    confirm(R.string.logout_title, getString(R.string.logout_message), R.string.btn_logout) {
+                        Navigator.logout(this)
+                    }
+                    true
+                } else false
+            }
         }
     }
 

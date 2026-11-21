@@ -38,6 +38,8 @@ class ProfileActivity : BaseActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         biometric = BiometricAuth(this)
+        // Barra provisional mientras carga el perfil: el botón de cerrar sesión queda disponible de inmediato.
+        setupToolbar(binding.toolbar, R.string.buyer_profile_title, showBack = false, showLogout = true)
 
         binding.btnSave.setOnClickListener { save() }
         binding.btnLogout.setOnClickListener { Navigator.logout(this) }
@@ -53,15 +55,15 @@ class ProfileActivity : BaseActivity() {
 
         when (role) {
             Role.BUYER -> {
-                setupToolbar(binding.toolbar, R.string.buyer_profile_title, showBack = false)
+                setupToolbar(binding.toolbar, R.string.buyer_profile_title, showBack = false, showLogout = true)
                 Navigator.setupBuyerNav(this, binding.bottomNav, R.id.nav_profile)
             }
             Role.SELLER -> {
-                setupToolbar(binding.toolbar, R.string.seller_profile_title, showBack = false)
+                setupToolbar(binding.toolbar, R.string.seller_profile_title, showBack = false, showLogout = true)
                 Navigator.setupSellerNav(this, binding.bottomNav, R.id.nav_profile)
             }
             Role.ADMIN -> {
-                setupToolbar(binding.toolbar, R.string.admin_profile_title)
+                setupToolbar(binding.toolbar, R.string.admin_profile_title, showLogout = true)
                 binding.bottomNav.visibility = View.GONE
             }
         }

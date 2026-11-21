@@ -9,7 +9,7 @@ import com.tiendavirtual.app.data.model.Role
 import com.tiendavirtual.app.data.repository.AuthRepository
 import com.tiendavirtual.app.databinding.ActivityRegisterBinding
 import com.tiendavirtual.app.ui.common.BaseActivity
-import com.tiendavirtual.app.ui.common.Navigator
+import com.tiendavirtual.app.ui.common.BiometricOffer
 
 /**
  * Registro de cuentas nuevas para los tres roles. Comprador y Vendedor se
@@ -71,7 +71,8 @@ class RegisterActivity : BaseActivity() {
             val store = binding.inputStore.text?.toString().orEmpty().trim()
             auth.register(name, email, phone, password, role, if (role == Role.SELLER) store else "")
             toast(R.string.msg_registered)
-            Navigator.goHome(this, role)
+            // Igual que en el login: ofrece activar la huella antes de abrir el panel.
+            BiometricOffer.offerThenGoHome(this, email, password, role)
         }
     }
 }

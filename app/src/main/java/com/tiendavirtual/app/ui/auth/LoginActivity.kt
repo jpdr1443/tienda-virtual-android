@@ -4,12 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tiendavirtual.app.R
-import com.tiendavirtual.app.data.model.User
 import com.tiendavirtual.app.data.repository.AuthRepository
 import com.tiendavirtual.app.databinding.ActivityLoginBinding
 import com.tiendavirtual.app.ui.common.BaseActivity
+import com.tiendavirtual.app.ui.common.BiometricOffer
 import com.tiendavirtual.app.ui.common.Navigator
 import com.tiendavirtual.app.util.BiometricAuth
 
@@ -40,17 +39,19 @@ class LoginActivity : BaseActivity() {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
 
-        // Si la huella está activada se muestra el botón y, al abrir la app
-        // (no después de cerrar sesión), se lanza el diálogo de inmediato.
-        if (biometric.isEnabled() && biometric.isAvailable()) {
-            binding.btnBiometric.visibility = View.VISIBLE
-            binding.btnBiometric.text = getString(R.string.btn_biometric_for, biometric.enabledEmail())
-            binding.inputEmail.setText(biometric.enabledEmail())
-            if (savedInstanceState == null && !intent.getBooleanExtra(EXTRA_FROM_LOGOUT, false)) {
-                loginWithFingerprint()
+        // Si el teléfono tiene sensor de huella se muestra el botón. Cuando la huella
+        // ya está activada, al abrir la app (no después de cerrar sesión) se pide de inmediato.
+        when {
+            biometric.isEnabled() && biometric.isAvailable() -> {
+                binding.btnBiometric.visibility = View.VISIBLE
+                binding.btnBiometric.text = getString(R.string.btn_biometric_for, biometric.enabledEmail())
+                binding.inputEmail.setText(biometric.enabledEmail())
+                if (savedInstanceState == null && !intent.getBooleanExtra(EXTRA_FROM_LOGOUT, false)) {
+                    loginWithFingerprint()
+                }
             }
-        } else {
-            binding.btnBiometric.visibility = View.GONE
+            biometric.isAvailable() -> binding.btnBiometric.visibility = View.VISIBLE
+            else -> binding.btnBiometric.visibility = View.GONE
         }
     }
 
@@ -67,7 +68,7 @@ class LoginActivity : BaseActivity() {
 
         launchUi(binding.progress, binding.btnLogin, binding.btnBiometric) {
             val user = auth.login(email, password)
-            offerFingerprint(user, email, password)
+            BiometricOffer.offerThenGoHome(this, email, password, user.roleEnum)
         }
     }
 
@@ -82,29 +83,6 @@ class LoginActivity : BaseActivity() {
             },
             onError = { message -> toast(message) }
         )
-    }
-
-    /**
-     * Después del primer ingreso con contraseña ofrece activar la huella,
-     * si el teléfono tiene sensor y aún no está activada para este correo.
-     */
-    private fun offerFingerprint(user: User, email: String, password: String) {
-        if (!biometric.isAvailable() || biometric.enabledEmail() == email) {
-            Navigator.goHome(this, user.roleEnum)
-            return
-        }
-        MaterialAlertDialogBuilder(this)
-            .setTitle(R.string.biometric_offer_title)
-            .setMessage(R.string.biometric_offer_message)
-            .setCancelable(false)
-            .setNegativeButton(R.string.not_now) { _, _ -> Navigator.goHome(this, user.roleEnum) }
-            .setPositiveButton(R.string.activate) { _, _ ->
-                biometric.enable(email, password) { enabled ->
-                    toast(if (enabled) R.string.biometric_enabled else R.string.biometric_not_activated)
-                    Navigator.goHome(this, user.roleEnum)
-                }
-            }
-            .show()
     }
 
     companion object {

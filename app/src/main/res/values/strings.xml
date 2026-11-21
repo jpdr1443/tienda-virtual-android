@@ -222,7 +222,7 @@
     <string name="home_categories">Categorías</string>
     <string name="home_featured">Novedades</string>
     <string name="catalog_title">Catálogo</string>
-    <string name="catalog_empty">No hay productos disponibles</string>
+    <string name="catalog_empty">Aún no hay productos publicados. Inicia sesión como Vendedor y toca "Nuevo producto" para publicar el primero.</string>
     <string name="filter_all">Todos</string>
     <string-array name="categories">
         <item>Tecnología</item>
@@ -292,6 +292,8 @@
     <string name="profile_data_title">Mis datos</string>
     <string name="btn_update_profile">Actualizar perfil</string>
     <string name="btn_logout">Cerrar sesión</string>
+    <string name="logout_title">¿Cerrar sesión?</string>
+    <string name="logout_message">Volverás a la pantalla de inicio de sesión para entrar con otro usuario.</string>
 
     <!-- Navegación inferior -->
     <string name="nav_home">Inicio</string>
